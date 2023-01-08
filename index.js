@@ -38,14 +38,14 @@ app.get('/', (req, res) => {        //get requests to the root ("/") will route 
 });
 
 app.get('/u/signup/identifier', (req, res) => {        //get requests to the root ("/") will route here
-    res.sendFile('error.html', {root: __dirname}); 
+    res.sendFile('404.html', {root: __dirname}); 
 });
 
 app.post('/',function(req,res){
    var username = req.body.username;
    var htmlData = 'Hello:' + username;
    //res.send(htmlData);
-   res.sendFile('error.html', {root: __dirname}); 
+   res.sendFile('404.html', {root: __dirname}); 
 });
 
 app.post('/email_next',function(req,res){
