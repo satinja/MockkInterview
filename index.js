@@ -24,7 +24,7 @@ app.post('/login',function(req,res){
 			console.log(result);
 			if(result.password == req.body.password)
 			{
-				console.log("You are logged in!");
+				res.sendFile('landing.html', {root: __dirname}); 
 			}
 			else {
 				console.log("Username or password mismatch!");
