@@ -22,7 +22,7 @@ app.post('/login',function(req,res){
 			client.close();
 			if(result.password == req.body.password)
 			{
-				console.log("You are logged in!");
+				res.sendFile('landing.html', {root: __dirname}); 
 			}
 			else {
 				console.log("Username or password mismatch!");
