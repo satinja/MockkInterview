@@ -1,8 +1,7 @@
 const express = require('express'); //Import the express dependency
-var mongoose = require('mongoose');
 console.log("Server Side code is running");
 const app = express();              //Instantiate an express app, the main work horse of this server
-const port = 5000;                  //Save the port number where your server will be listening
+const port = 5000;                //Save the port number where your server will be listening
 app.use(express.static(__dirname + '/public'));
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
@@ -13,6 +12,7 @@ app.use(express.json());
 
 app.post('/login',function(req,res){
    var MongoClient = require('mongodb').MongoClient;
+   console.log("before db Connected!");
 	MongoClient.connect('mongodb://admin:password@localhost:27017', function(err, client){
 		if(err) throw err;
 		console.log("DB Connected!");
@@ -56,7 +56,7 @@ app.post('/email_next',function(req,res){
 
 app.post('/login',function(req,res){
    res.sendFile('password.html', {root: __dirname}); 
-});
+});3
 
 app.get('/reset_password',function(req,res){
    res.sendFile('reset_password.html', {root: __dirname}); 
@@ -81,21 +81,44 @@ app.post('/account_password',function(req,res){
 
 
 app.post('/start_apti',function(req, res){
+	console.log("request from postman");
 	var MongoClient = require('mongodb').MongoClient;
 	 MongoClient.connect('mongodb://admin:password@localhost:27017', function(err, client){
 		 if(err) throw err;
 		 console.log("DB Connected for Test Button!");
 		 var db = client.db('user_db');
-		 var query = {question: '1'};
-		console.log();
-		 db.collection('Apti_Questions').findOne(query, function(err, result){
+		 var query = {question: 'Ques.1'};
+		 var query1 = {question: 'Ques.2'};
+		//  var query = {question_heading:'Based on Time and Work'};
+		 db.collection('Apti_Questions').findOne(query, query1,function(err, result,result1){
 			 if(err) throw err;
 			 client.close();
 			 console.log(result);
+			 res.send(
+				"<head>"+"<br>"+"<h1>"+result.question_heading+"</head>" +
+				"<h2>" + result.question + "<h3>"+result.question_description+"</>"+
+				"<ul>"+"<button type=Option1:>"+result.option_1+
+				"<ul>"+"<button type=Option2:>"+result.option_2+
+				"<ul>"+"<button type=Option3:>"+result.option_3+
+				"<ul onclick =\"alert(1)\">"+"<button type=Option4:>"+result.option_4+
+				"<ul>"+"<button type=Option4:>"+"Next"
+				);
+				
+
+				
+
+
+
+
+				console.log(result.correct_answer);
+
+
 		 });
+		 
+
 	 });
  });
- 
+
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
     console.log(`Now listening on port ${port}`); 
