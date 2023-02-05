@@ -129,8 +129,9 @@
 		  <div class="face face2">
 			<div class="content">
 			  <p>Test your aptitude skills.</p>
-			  <form action="/start_apti" method="POST">
-				<button class="submit-btn" type="submit" name="start_apti">Start Test</button>
+			  <form action="/ques" method="POST">
+				<button class="submit-btn" type="submit" name="ques.ejs" onclick = "ques.ejs">Start Test</button>
+				<!-- <button type="submit" class="btn btn-success" onclick='ques1.ejs'>Start Test</button> -->
 			</form>
 			</div>
 		  </div>
@@ -139,13 +140,16 @@
 		  <div class="face face1">
 			<div class="content">
 			  <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/launch_128.png?raw=true">
-			  <h3>Software Developer</h3>
+			  <h3>Top DSA Algorithms</h3>
 			</div>
 		  </div>
 		  <div class="face face2">
 			<div class="content">
-			  <p>Software Developer interviews are designed to assess your skills from multiple aspects.</p>
-			  <a href="#">Start Interview</a>
+			  <p>Here the most asked algorithms will help you to keep updated for the interview rounds.</p>
+			  <form action = "/algorithms" method = "POST">
+			  <!-- <a href="#">Go! To Algorithms </a> -->
+			  <button class="submit-btn" type="submit" name="algorithms">Go!To Algorithms Section</button>
+			  </form>
 			</div>
 		  </div>
 		</div>
