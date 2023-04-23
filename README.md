@@ -7,6 +7,8 @@
 ![image](https://user-images.githubusercontent.com/96378305/233826704-8eafe70c-e710-4502-afd7-bc138bb7d27e.png)
 ## After the correct info credentials are entered the follwing page appears
 ![image](https://user-images.githubusercontent.com/96378305/233826824-eb368aa5-aa0e-4fc6-b6f2-dbc2a51c3cfe.png)
+## Aptitude page opens
+![image](https://user-images.githubusercontent.com/96378305/233826890-5fb7ab01-8efb-4983-a9ea-ca9f668942af.png)
 
 
 
