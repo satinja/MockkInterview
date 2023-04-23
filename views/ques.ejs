@@ -10,18 +10,25 @@
 
 <body>
     <form action="next_question" method="POST">
-        <h1>Question 1</h1>
-        <ul>
-
-                <%= ques.question_heading %>
+        <ul>    
+                <h1><%= ques.question %></h1>
+                <h3><%= ques.question_heading %></h3>
+                <h2><br><%= ques.question_description %></h2>
                     <li>
                         <%= ques.question_type %>
                     </li>
-                    <li>
-                        <%= ques.option_1 %>
-                    </li>
-                    <input name="prev_question" id="prev_question" type="text" value="<%= ques.current_Question_Number %>" hidden/>
                     
+                        <br>Please tick the correct option
+                        <input type = "radio" id=" ques.option_1" value = 1>
+                        <%= ques.option_1 %>
+                        <input type = "radio" id=" ques.option_2" value = 2>
+                        <%= ques.option_2 %>
+                        <input type = "radio" id=" ques.option_3" value = 3>
+                        <%= ques.option_3 %>
+                        <input type = "radio" id=" ques.option_4" value = 4>
+                        <%= ques.option_4 %>
+                    <input name="prev_question" id="prev_question" type="text" value="<%= ques.current_Question_Number %>" hidden/>
+                        
                    
         </ul>
         <button class="submit-btn" type="submit" name="next_question">Next-Question</button>

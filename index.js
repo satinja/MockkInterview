@@ -1,7 +1,9 @@
 const express = require("express");
 // const mongoose = require('mongoose'); //Import the express dependency
 console.log("Server Side code is running");
-const app = express(); //Instantiate an express app, the main work horse of this server
+const app = express();
+const server = require("http").Server(app);
+const { v4: uuidv4 } = require("uuid"); //Instantiate an express app, the main work horse of this server
 const port = 5000;
 app.set("view engine", "ejs"); //Save the port number where your server will be listening
 app.use(express.static(__dirname + "/public"));
@@ -137,26 +139,33 @@ function renderNextQuestion(req, res, prev_question) {
       if (err) throw err;
       console.log("ejs to be displayes in the console");
       var db = client.db("user_db");
-	  var query = {question: ('Ques.' + (parseInt(prev_question)+1))}
-	  console.log(query);
-      db.collection("Apti_Questions").findOne(query,function (err, result) {
+      var query = { question: "Ques." + (parseInt(prev_question) + 1) };
+      console.log(query);
+      db.collection("Apti_Questions").findOne(query, function (err, result) {
         if (err) throw err;
-
         var question = {
+          question: result.question,
           question_heading: result.question_heading,
+          question_description: result.question_description,
           question_type: result.question_type,
           option_1: result.option_1,
-          current_Question_Number: (prev_question+1).toString(),
+          option_2: result.option_2,
+          option_3: result.option_3,
+          option_4: result.option_4,
+          current_Question_Number: (prev_question + 1).toString(),
         };
-		console.log(question);
+        console.log(question);
         res.render("ques", { ques: question });
       });
     }
   );
 }
+//render previous question
 app.post("/ques", function (req, res) {
   renderNextQuestion(req, res, 0);
+  // renderPreviousQuestion(req,res,1);
 });
+
 // });
 //  app.get('/next_apti_ques',function(req, res){
 // 	console.log("request from postman");
@@ -198,8 +207,6 @@ app.post("/next_question", function (req, res) {
   console.log("request from post man for ejs question 2");
   console.log(req.body.prev_question);
   renderNextQuestion(req, res, parseInt(req.body.prev_question));
-
-
 });
 app.post("/algorithms", function (req, res) {
   console.log("request from postman");
@@ -223,6 +230,10 @@ app.post("/algorithms", function (req, res) {
   );
 });
 
+//video call over internet
+app.get("/room", (req, res) => {
+  res.render("room", { roomId: req.param.room });
+});
 app.listen(port, () => {
   //server starts listening for any attempts from a client to connect at port: {port}
   console.log(`Now listening on port ${port}`);
